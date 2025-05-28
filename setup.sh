@@ -10,10 +10,10 @@ fontsdir="$HOME/.local/share/fonts"
 omzaliasurl="https://raw.githubusercontent.com/contrxl/Kali-Configurations/refs/heads/main/aliases.zsh"
 omzurl="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
 fonts=""
-fonts="${fonts}https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold.ttf"
-fonts="${fonts}https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Italic.ttf"
-fonts="${fonts}https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Regular.ttf" 
-fonts="${fonts}https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold%20Italic.ttf"
+fonts="${fonts} https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold.ttf"
+fonts="${fonts} https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Italic.ttf"
+fonts="${fonts} https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Regular.ttf" 
+fonts="${fonts} https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold%20Italic.ttf"
 
 printf '=' 
 printf "INSTALLING OH-MY-ZSH AND IMPORTING ALIAS FILE"
@@ -69,7 +69,7 @@ else
 	printf "\n[*] Downloading fonts...\n"
 	for font in ${fonts}
 	do
-		printf '[*] Downloading '
+		printf "[*] Downloading "
 		wget --no-verbose $font
 	done
 	fc-cache -f -v 1> /dev/null 2>&1
