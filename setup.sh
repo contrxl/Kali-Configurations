@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 omzdir="$HOME/.oh-my-zsh"
 omzaliasdir="$omzdir/custom"
@@ -9,7 +9,7 @@ fontsdir="$HOME/.local/share/fonts"
 
 omzaliasurl="https://raw.githubusercontent.com/contrxl/Kali-Configurations/refs/heads/main/aliases.zsh"
 omzurl="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
-fonts=("https://github.com/contrxl/Kali-Configurations/blob/main/Font/MesloLGS%20NF%20Bold%20Italic.ttf" "https://github.com/contrxl/Kali-Configurations/blob/main/Font/MesloLGS%20NF%20Bold.ttf" "https://github.com/contrxl/Kali-Configurations/blob/main/Font/MesloLGS%20NF%20Italic.ttf" "https://github.com/contrxl/Kali-Configurations/blob/main/Font/MesloLGS%20NF%20Regular.ttf")
+fonts=("https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold.ttf" "https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Italic.ttf" "https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Regular.ttf" "https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold%20Italic.ttf")
 
 echo "Checking for oh-my-zsh install at $omzdir..."
 if [ -d $omzdir ]
@@ -17,7 +17,7 @@ then
 	echo "Oh My Zsh already installed, moving on..."
 else
 	echo "Downloading & installing oh-my-zsh..."
-	sh -c "$(curl -fsSl $omzurl)"
+	sh -c "$(curl -fsSl $omzurl)" "" --unattended
 	echo "Done."
 fi
 
@@ -54,7 +54,7 @@ else
 	echo "Done."
 	cd $fontsdir
 	echo "Downloading fonts..."
-	for font in $fonts
+	for font in ${fonts[@]}
 	do
 		echo "Downloading $font..."
 		wget --no-verbose $font
