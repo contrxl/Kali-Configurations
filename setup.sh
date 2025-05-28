@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 omzdir="$HOME/.oh-my-zsh"
 omzaliasdir="$omzdir/custom"
@@ -11,95 +11,115 @@ omzaliasurl="https://raw.githubusercontent.com/contrxl/Kali-Configurations/refs/
 omzurl="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
 fonts=("https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold.ttf" "https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Italic.ttf" "https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Regular.ttf" "https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold%20Italic.ttf")
 
-echo "Checking for oh-my-zsh install at $omzdir..."
+printf '=%.0s' {1..30}
+printf "INSTALLING OH-MY-ZSH AND IMPORTING ALIAS FILE"
+printf '=%.0s' {1..30}
+printf "\n[*] Checking for oh-my-zsh install at $omzdir..."
 if [ -d $omzdir ]
 then
-	echo "Oh My Zsh already installed, moving on..."
+	printf "\n[+] Oh My Zsh already installed at $omzdir, moving on..."
 else
-	echo "Downloading & installing oh-my-zsh..."
+	printf "\n[*] Downloading & installing oh-my-zsh..."
 	sh -c "$(curl -fsSl $omzurl)" "" --unattended
-	echo "Done."
+	printf "\n[+] Done. Oh My Zsh installed at $omzdir."
 fi
 
-echo "Creating alias file..."
-echo "Cloning aliases.zsh to $omzaliasdir..."
+printf "\n[*] Creating alias file..."
+printf "\n[*] Cloning aliases.zsh to $omzaliasdir..."
 cd $omzaliasdir; curl -s -O $omzaliasurl; cd $HOME
-echo "Done."
+printf "\n[+] Done. Alias file imported to $omzaliasdir.\n\n"
 
-echo "Checking for auto-suggest plugin install at $omzautosuggest..."
+printf '=%.0s' {1..30}
+printf "INSTALLING ZSH-AUTOSUGGEST PLUGIN"
+printf '=%.0s' {1..30}
+printf "\n[*] Checking for auto-suggest plugin install at $omzautosuggest..."
 if [ -d $omzautosuggest ]
 then
-	echo "Autosuggest plugin already present, moving on..."
+	printf "\n[+] Autosuggest plugin already installed at $omzautosuggest, moving on...\n\n"
 else
-	echo "Downloading & installing zsh-autosuggest..."
+	printf "\n[*] Downloading & installing zsh-autosuggest..."
 	cd $omzplugindir; git clone https://github.com/zsh-users/zsh-autosuggestions; cd $HOME
-	echo "Done."
+	printf "\n[+] Done. Plugin installed at $omzplugindir.\n\n"
 fi
 
-echo "Checking for Powerlevel 10k & fonts..."
+printf '=%.0s' {1..30}
+printf "INSTALLING POWERLEVEL10K AND FONTS"
+printf '=%.0s' {1..30}
+printf "\n[*] Checking for Powerlevel 10k & fonts..."
 if [ -d $pl10k ]
 then
-	echo "Powerlevel 10k already present, moving on..."
+	printf "\n[+] Powerlevel 10k already installed at $pl10k, moving on..."
 else
-	echo "Downloading & installing Powerlevel 10k..."
+	printf "\n[*] Downloading & installing Powerlevel 10k..."
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $pl10k
-	echo "Done."
+	printf "\n[+] Done. Powerlevel10k installed at $pl10k."
 fi
 if ls $fontsdir/Meslo* 1> /dev/null 2>&1
 then
-	echo "Fonts already exist, moving on..."
+	printf "\n[+] Fonts already exist, moving on...\n\n"
 else
-	echo "Creating $fontsdir..."
+	printf "\n[*] Creating $fontsdir..."
 	mkdir -p $fontsdir
-	echo "Done."
+	printf "\n[+] Done."
 	cd $fontsdir
-	echo "Downloading fonts..."
+	printf "\n[*] Downloading fonts..."
 	for font in ${fonts[@]}
 	do
-		echo "Downloading $font..."
-		wget --no-verbose $font
+		printf "\n[*] Downloading $font..."
+		wget --no-verbose $font 1> /dev/null 2>&1
 	done
-	fc-cache -f -v
+	fc-cache -f -v 1> /dev/null 2>&1
 	cd $HOME	
-	echo "Done."
+	printf "\n[+] Done. Fonts installed at $fontsdir.\n\n"
 fi
 
-echo "Checking for Ruby..."
+printf '=%.0s' {1..30}
+printf "INSTALLING RUBY AND COLORLS GEM"
+printf '=%.0s' {1..30}
+printf "\n[*] Checking for Ruby..."
 if dpkg --get-selections | grep -v deinstall | grep ruby 1> /dev/null 2>&1
 then
-	echo "Ruby already installed..."
-	echo "Checking for colorls gem..."
+	printf "\n[+] Ruby already installed..."
+	printf "\n[*] Checking for colorls gem..."
 	if gem list | grep colorls 1> /dev/null 2>&1
 	then
-		echo "Colorls already installed..."
+		printf "\n[+] Colorls already installed...\n\n"
 	else
-		echo "Installing colorls..."
+		printf "\n[*] Installing colorls..."
 		sudo gem install colorls
-		echo "Done."
+		printf "\n[+] Done\n\n."
 	fi
 else
-	echo "Installing Ruby..."
+	printf "\n[*] Installing Ruby..."
 	sudo apt install Ruby
-	echo "Done."
-	echo "Installing colorls gem..."
+	printf "\n[+] Done."
+	printf "\n[*] Installing colorls gem..."
 	sudo gem install colorls
-	echo "Done."
+	printf "\n[+] Done."
 fi
 
-echo "WARNING! Next step will overwrite your /.zshrc file, continue? Y/N"
+printf '=%.0s' {1..30}
+printf "IMPORTING ZSH AND PK10 ZSH FILES"
+printf '=%.0s' {1..30}
+printf "\n[!] WARNING! Next step will overwrite your /.zshrc and /.pk10.zsh files."
+printf "\n[!] A backup of your /.zshrc file will be created at /.zshrc-pre-setup."
+printf "\n[!] You can continue without this step if you wish to preserve your existing /.zshrc file."
+printf "\n[!] Would you like to proceed? Y/N: "
 read input
 if [ $input == "Y" ]
 then
-	echo "Grabbing .zshrc file..."
+	printf "\n[*] Grabbing .zshrc file..."
 	cd $HOME
-	curl https://raw.githubusercontent.com/contrxl/Kali-Configurations/refs/heads/main/zshrc > $HOME/.zshrc.new
+	curl -s https://raw.githubusercontent.com/contrxl/Kali-Configurations/refs/heads/main/zshrc > $HOME/.zshrc.new
 	mv .zshrc .zshrc-pre-setup
 	mv .zshrc.new .zshrc
-	echo "Done."
-	echo "Grabbing .pk10.zsh file..."
-	curl https://raw.githubusercontent.com/contrxl/Kali-Configurations/refs/heads/main/p10k.zsh > $HOME/.p10k.zsh.new
+	printf "\n[+] Done."
+	printf "\n[*] Grabbing .pk10.zsh file..."
+	curl -s https://raw.githubusercontent.com/contrxl/Kali-Configurations/refs/heads/main/p10k.zsh > $HOME/.p10k.zsh.new
 	mv .p10k.zsh.new .p10k.zsh
-	echo "Done."
+	printf "\n[+] Done."
 else
-	echo "Finishing."
+	printf "\n[-] ZSHRC and P10K not imported."
 fi
+
+printf "\n[+] Setup completed! Restart terminal for all logos, fonts and configs to take hold."
