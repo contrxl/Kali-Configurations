@@ -62,11 +62,11 @@ else
 	mkdir -p $fontsdir
 	printf "\n[+] Done."
 	cd $fontsdir
-	printf "\n[*] Downloading fonts..."
+	printf "\n[*] Downloading fonts...\n"
 	for font in ${fonts[@]}
 	do
-		printf "\n[*] Downloading $font..."
-		wget --no-verbose $font 1> /dev/null 2>&1
+		printf '[*] Downloading '
+		wget --no-verbose $font
 	done
 	fc-cache -f -v 1> /dev/null 2>&1
 	cd $HOME	
@@ -85,12 +85,12 @@ then
 	then
 		printf "\n[+] Colorls already installed...\n\n"
 	else
-		printf "\n[*] Installing colorls..."
-		sudo gem install colorls
+		printf "\n[*] Installing colorls...\n"
+		sudo gem install colorls 1> /dev/null 2>&1
 		printf "\n[+] Done\n\n."
 	fi
 else
-	printf "\n[*] Installing Ruby..."
+	printf "\n[*] Installing Ruby...\n"
 	sudo apt install Ruby
 	printf "\n[+] Done."
 	printf "\n[*] Installing colorls gem..."
