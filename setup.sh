@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 omzdir="$HOME/.oh-my-zsh"
 omzaliasdir="$omzdir/custom"
@@ -9,11 +9,15 @@ fontsdir="$HOME/.local/share/fonts"
 
 omzaliasurl="https://raw.githubusercontent.com/contrxl/Kali-Configurations/refs/heads/main/aliases.zsh"
 omzurl="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
-fonts=("https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold.ttf" "https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Italic.ttf" "https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Regular.ttf" "https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold%20Italic.ttf")
+fonts=""
+fonts="${fonts}https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold.ttf"
+fonts="${fonts}https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Italic.ttf"
+fonts="${fonts}https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Regular.ttf" 
+fonts="${fonts}https://github.com/contrxl/Kali-Configurations/raw/refs/heads/main/Font/MesloLGS%20NF%20Bold%20Italic.ttf"
 
-printf '=%.0s' {1..30}
+printf '=' 
 printf "INSTALLING OH-MY-ZSH AND IMPORTING ALIAS FILE"
-printf '=%.0s' {1..30}
+printf '=' 
 printf "\n[*] Checking for oh-my-zsh install at $omzdir..."
 if [ -d $omzdir ]
 then
@@ -29,9 +33,9 @@ printf "\n[*] Cloning aliases.zsh to $omzaliasdir..."
 cd $omzaliasdir; curl -s -O $omzaliasurl; cd $HOME
 printf "\n[+] Done. Alias file imported to $omzaliasdir.\n\n"
 
-printf '=%.0s' {1..30}
+printf '=' 
 printf "INSTALLING ZSH-AUTOSUGGEST PLUGIN"
-printf '=%.0s' {1..30}
+printf '=' 
 printf "\n[*] Checking for auto-suggest plugin install at $omzautosuggest..."
 if [ -d $omzautosuggest ]
 then
@@ -42,9 +46,9 @@ else
 	printf "\n[+] Done. Plugin installed at $omzplugindir.\n\n"
 fi
 
-printf '=%.0s' {1..30}
+printf '=' 
 printf "INSTALLING POWERLEVEL10K AND FONTS"
-printf '=%.0s' {1..30}
+printf '=' 
 printf "\n[*] Checking for Powerlevel 10k & fonts..."
 if [ -d $pl10k ]
 then
@@ -73,9 +77,9 @@ else
 	printf "\n[+] Done. Fonts installed at $fontsdir.\n\n"
 fi
 
-printf '=%.0s' {1..30}
+printf '=' 
 printf "INSTALLING RUBY AND COLORLS GEM"
-printf '=%.0s' {1..30}
+printf '=' 
 printf "\n[*] Checking for Ruby..."
 if dpkg --get-selections | grep -v deinstall | grep ruby 1> /dev/null 2>&1
 then
@@ -98,15 +102,15 @@ else
 	printf "\n[+] Done."
 fi
 
-printf '=%.0s' {1..30}
+printf '=' 
 printf "IMPORTING ZSH AND PK10 ZSH FILES"
-printf '=%.0s' {1..30}
+printf '=' 
 printf "\n[!] WARNING! Next step will overwrite your /.zshrc and /.pk10.zsh files."
 printf "\n[!] A backup of your /.zshrc file will be created at /.zshrc-pre-setup."
 printf "\n[!] You can continue without this step if you wish to preserve your existing /.zshrc file."
 printf "\n[!] Would you like to proceed? Y/N: "
 read input
-if [ $input == "Y" ]
+if [ "$input" = "Y" ]
 then
 	printf "\n[*] Grabbing .zshrc file..."
 	cd $HOME
@@ -122,4 +126,4 @@ else
 	printf "\n[-] ZSHRC and P10K not imported."
 fi
 
-printf "\n[+] Setup completed! Restart terminal for all logos, fonts and configs to take hold."
+printf "\n[+] Setup completed! Restart terminal for all logos, fonts and configs to take hold.\n"
