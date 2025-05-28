@@ -67,7 +67,7 @@ else
 	printf "\n[+] Done."
 	cd $fontsdir
 	printf "\n[*] Downloading fonts...\n"
-	for font in ${fonts[@]}
+	for font in ${fonts}
 	do
 		printf '[*] Downloading '
 		wget --no-verbose $font
