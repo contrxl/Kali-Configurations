@@ -62,7 +62,7 @@ Once downloaded, rename your current `.zshrc` and `.p10k.zsh` files to something
 ## Colorls
 Current link is: https://github.com/athityakumar/colorls
 > [!NOTE]
-> This needs `Ruby` to install, if you do not have this installed, you can do so by running `sudo apt install ruby`.
+> This needs `Ruby` to install, if you do not have this installed, you can do so by running `sudo apt install ruby-full`.
 Install the gem using:
 `sudo gem install colorls`.
 
